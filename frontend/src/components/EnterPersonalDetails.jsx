@@ -204,6 +204,7 @@ const EnterPersonalDetails = ({ isEdit = false }) => {
           `${import.meta.env.VITE_URL || 'http://localhost:3000'}/api/v1/profile/Enter-Personal-Details`,
           formData,
           {
+            withCredentials: true,
             headers: {
               "Content-Type": "multipart/form-data",
             },

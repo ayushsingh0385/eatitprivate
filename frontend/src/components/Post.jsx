@@ -168,6 +168,7 @@ const Post = () => {
                 headers: {
                     "Content-Type": "multipart/form-data",
                 },
+                withCredentials: true,
             });
 
             toast.success("Post created successfully");
@@ -188,7 +189,9 @@ const Post = () => {
     // Like post
     const handleLike = async (postId) => {
         try {
-            await axios.post(`${import.meta.env.VITE_URL || 'http://localhost:3000'}/api/v1/posts/${postId}/like`);
+            await axios.post(`${import.meta.env.VITE_URL || 'http://localhost:3000'}/api/v1/posts/${postId}/like`, {}, {
+                withCredentials: true,
+            });
             fetchPosts();
         } catch (error) {
             toast.error("Failed to like post");
@@ -204,7 +207,9 @@ const Post = () => {
         }
 
         try {
-            await axios.post(`${import.meta.env.VITE_URL || 'http://localhost:3000'}/api/v1/posts/${postId}/comment`, { text: commentText, userFullName: fullname });
+            await axios.post(`${import.meta.env.VITE_URL || 'http://localhost:3000'}/api/v1/posts/${postId}/comment`, { text: commentText, userFullName: fullname }, {
+                withCredentials: true,
+            });
             setCommentText("");
             setShowCommentBox(null);
             fetchPosts();
@@ -222,7 +227,9 @@ const Post = () => {
         }
 
         try {
-            await axios.post(`${import.meta.env.VITE_URL || 'http://localhost:3000'}/api/v1/posts/comment/${commentId}/reply`, { text: replyText, userFullName: fullname });
+            await axios.post(`${import.meta.env.VITE_URL || 'http://localhost:3000'}/api/v1/posts/comment/${commentId}/reply`, { text: replyText, userFullName: fullname }, {
+                withCredentials: true,
+            });
             setReplyText("");
             setReplyingTo(null);
             fetchPosts();

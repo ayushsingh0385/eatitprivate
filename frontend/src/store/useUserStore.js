@@ -20,6 +20,7 @@ export const useUserStore = create(
           
           const response = await axios.post(`${API_END_POINT}/signup`, input, {
             headers: { "Content-Type": "application/json" },
+            withCredentials: true,
           });
           if (response.data.success) {
             toast.success(response.data.message);
@@ -47,6 +48,7 @@ export const useUserStore = create(
               headers: {
                 "Content-Type": "application/json",
               },
+              withCredentials: true,
             }
           );
       
@@ -76,6 +78,7 @@ export const useUserStore = create(
               headers: {
                 "Content-Type": "application/json",
               },
+              withCredentials: true,
             }
           );
           if (response.data.success) {
@@ -121,7 +124,9 @@ export const useUserStore = create(
       logout: async () => {
         try {
           set({ loading: true });
-          const response = await axios.post(`${API_END_POINT}/logout`);
+          const response = await axios.post(`${API_END_POINT}/logout`, {}, {
+            withCredentials: true,
+          });
           if (response.data.success) {
             toast.success(response.data.message);
             set({ loading: false, user: null, isAuthenticated: false });
@@ -136,7 +141,10 @@ export const useUserStore = create(
           set({ loading: true });
           const response = await axios.post(
             `${API_END_POINT}/forgot-password`,
-            { email }
+            { email },
+            {
+              withCredentials: true,
+            }
           );
           if (response.data.success) {
             toast.success(response.data.message);
@@ -152,7 +160,10 @@ export const useUserStore = create(
           set({ loading: true });
           const response = await axios.post(
             `${API_END_POINT}/reset-password`,
-            { take }
+            { take },
+            {
+              withCredentials: true,
+            }
           );
           if (response.data.success) {
             toast.success(response.data.message);
@@ -172,6 +183,7 @@ export const useUserStore = create(
               headers: {
                 "Content-Type": "application/json",
               },
+              withCredentials: true,
             }
           );
           if (response.data.success) {
