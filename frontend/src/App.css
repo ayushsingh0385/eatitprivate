@@ -1,0 +1,155 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Custom styles */
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0;
+  text-align: center;
+  width: 100%;
+}
+
+.app-container {
+  @apply flex flex-col min-h-screen w-full;
+}
+
+.hero-container {
+  @apply p-4 md:p-16 flex flex-col items-center justify-center min-h-[80vh] bg-green-50;
+}
+
+/* Button styles */
+.btn {
+  display: inline-block;
+  background-color: var(--primary);
+  color: white;
+  border: none;
+  border-radius: var(--radius);
+  padding: 0.5rem 1rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: var(--transition);
+  text-align: center;
+  margin: 0.25rem;
+  box-shadow: 0 2px 4px rgba(74, 108, 247, 0.2);
+}
+
+@media (min-width: 768px) {
+  .btn {
+    padding: 0.7rem 1.2rem;
+    font-size: 1rem;
+    margin: 0.5rem 0.25rem;
+  }
+}
+
+.btn:hover {
+  background-color: var(--primary-dark);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(74, 108, 247, 0.3);
+}
+
+.btn:active {
+  transform: translateY(0);
+}
+
+.btn-primary {
+  background-color: var(--primary);
+}
+
+.btn-primary:hover {
+  background-color: var(--primary-dark);
+}
+
+/* Navigation buttons container */
+.flex {
+  display: flex;
+}
+
+.flex-wrap {
+  flex-wrap: wrap;
+}
+
+.gap-4 {
+  gap: 1rem;
+}
+
+.p-4 {
+  padding: 1rem;
+}
+
+.bg-gray-100 {
+  background-color: #f7fafc;
+}
+
+/* Navigation buttons in a single row */
+.btn-nav {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--primary);
+  color: white;
+  border: none;
+  border-radius: var(--radius);
+  padding: 0.25rem 0.6rem;
+  font-size: 0.7rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: var(--transition);
+  white-space: nowrap;
+  flex-shrink: 0;
+  min-width: fit-content;
+}
+
+.btn-nav:hover {
+  background-color: var(--primary-dark);
+  transform: translateY(-1px);
+}
+
+.btn-nav:first-child {
+  margin-left: 0;
+}
+
+.hide-scrollbar {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;  /* Chrome, Safari and Opera */
+}
+
+.no-wrap {
+  flex-wrap: nowrap;
+}
+
+/* Card hover effects */
+.feature-card {
+  transition: all 0.3s ease;
+}
+
+.feature-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+}
+
+/* Mobile responsive adjustments */
+@media (max-width: 640px) {
+  .feature-card:hover {
+    transform: translateY(-3px);
+  }
+  
+  .feature-card {
+    padding: 1rem;
+  }
+}
+
+/* Logo branding */
+.logo-text span:first-child {
+  color: #3b82f6; /* blue-500 */
+}
+
+.logo-text span:last-child {
+  color: #16a34a; /* green-600 */
+}

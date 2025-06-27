@@ -1,0 +1,28 @@
+{
+  "name": "eatit",
+  "version": "1.0.0",
+  "description": "![Built at Hack36](https://postimage.me/images/2025/04/19/built-at-hack36.png)\r ## Demo Video \r [Youtube Demo Video](https://youtu.be/Wx9JdofD9Ec) This video demonstrates the key features and functionality of the Nutrition Assistant Application.",
+  "main": "postcss.config.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "install-all": "npm install && cd backend && npm install && cd ../frontend && npm install",
+    "start": "concurrently \"npm run start-backend\" \"npm run start-frontend\"",
+    "start-backend": "cd backend && node index.js",
+    "start-frontend": "cd frontend && npm run dev"
+  },
+  "dependencies": {
+    "concurrently": "^7.6.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Prsahant123kumar/EatiT.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/Prsahant123kumar/EatiT/issues"
+  },
+  "homepage": "https://github.com/Prsahant123kumar/EatiT#readme"
+}
