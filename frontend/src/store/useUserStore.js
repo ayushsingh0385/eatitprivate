@@ -2,6 +2,7 @@ import { create } from "zustand";
 import { createJSONStorage, persist } from "zustand/middleware";
 import axios from "axios";
 import { toast } from "sonner";
+import { useHealthProfileStore } from "./useUserInformationStore";
 
 const API_END_POINT = `${import.meta.env.VITE_URL || 'http://localhost:3000'}/api/v1/user`; 
 axios.defaults.withCredentials = true;
@@ -41,7 +42,7 @@ export const useUserStore = create(
       login: async (input) => {
         try {
           set({ loading: true });
-          const response = await axios.post(
+          const loginRes = await axios.post(
             `${API_END_POINT}/login`,
             input,
             {
@@ -52,16 +53,28 @@ export const useUserStore = create(
             }
           );
       
-          if (response.data.success) {
+          if (loginRes.data.success) {
             // Store token in localStorage and set Authorization header
-            if (response.data.token) {
-              localStorage.setItem('token', response.data.token);
-              axios.defaults.headers.common['Authorization'] = `Bearer ${response.data.token}`;
+            if (loginRes.data.token) {
+              localStorage.setItem('token', loginRes.data.token);
+              axios.defaults.headers.common['Authorization'] = `Bearer ${loginRes.data.token}`;
             }
-            
-            toast.success(response.data.message);
-            set({ loading: false, user: response.data.user, isAuthenticated: true });
-            return response.data.success
+            toast.success(loginRes.data.message);
+            set({ loading: false, user: loginRes.data.user, isAuthenticated: true });
+
+            // Fetch and set profile after login
+            try {
+              const profileRes = await axios.get(`${import.meta.env.VITE_URL || 'http://localhost:3000'}/api/v1/profile/me`, {
+                withCredentials: true,
+              });
+              if (profileRes.data && profileRes.data.user) {
+                useHealthProfileStore.getState().setProfile(profileRes.data.user);
+              }
+            } catch (profileErr) {
+              // Optionally handle profile fetch error
+              console.error("Failed to fetch profile after login", profileErr);
+            }
+            return loginRes.data.success
           }
         } catch (error) {
           console.error("Login error:", error); // Debugging

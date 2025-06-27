@@ -97,7 +97,7 @@ const login = async (req, res) => {
 
         return res.status(200).json({
             success: true,
-            message: `Welcome back ${user.fullname}`,
+            message: `Welcome back ${user.fullName}`,
             user: userWithoutPassword,
             token: token, // Include token in response
         });
@@ -138,7 +138,7 @@ const verifyEmail = async (req, res) => {
         await TempUser.deleteOne({ email: tempUser.email });
 
         // Send welcome email
-        await sendWelcomeEmail(newUser.email, newUser.fullname);
+        await sendWelcomeEmail(newUser.email, newUser.fullName);
 
         // ✅ Generate JWT token
         const token = jwt.sign({ userId: newUser._id }, process.env.SECRET_KEY, {
@@ -159,7 +159,7 @@ const verifyEmail = async (req, res) => {
             message: "Email verified successfully.",
             user: {
                 _id: newUser._id,
-                fullname: newUser.fullname,
+                fullName: newUser.fullName,
                 email: newUser.email,
                 contact: newUser.contact,
                 isVerified: newUser.isVerified

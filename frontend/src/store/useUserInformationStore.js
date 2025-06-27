@@ -61,6 +61,9 @@ export const useHealthProfileStore = create(
         // }
       },
 
+      // Set profile directly
+      setProfile: (profile) => set({ profile }),
+
       // Optional: fetch profile if needed
     }),
     {
