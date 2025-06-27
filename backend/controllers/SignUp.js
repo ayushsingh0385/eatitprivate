@@ -6,6 +6,7 @@ const { generateVerificationCode } = require("../utils/generateVerificationCode"
 const  generateToken  = require("../utils/generateToken");
 const { sendPasswordResetEmail, sendResetSuccessEmail, sendVerificationEmail, sendWelcomeEmail } = require("../mailtrap/email");
 const { DemoUserAuth: TempUser } = require("../models/TempUserAuth");
+const UserInformation = require("../models/UserInformation");
 
 const signup = async (req, res) => {
     try {
@@ -92,12 +93,16 @@ const login = async (req, res) => {
         user.lastLogin = new Date();
         await user.save();
 
+        // Fetch user profile to get fullName
+        const userProfile = await UserInformation.findOne({ authId: user._id });
+        const fullName = userProfile?.fullName || user.fullName || user.email;
+
         // Send user details without the password
         const userWithoutPassword = await User.findOne({ email }).select("-password");
 
         return res.status(200).json({
             success: true,
-            message: `Welcome back ${user.fullName}`,
+            message: `Welcome back ${fullName}`,
             user: userWithoutPassword,
             token: token, // Include token in response
         });
