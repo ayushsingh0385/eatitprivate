@@ -53,6 +53,12 @@ export const useUserStore = create(
           );
       
           if (response.data.success) {
+            // Store token in localStorage and set Authorization header
+            if (response.data.token) {
+              localStorage.setItem('token', response.data.token);
+              axios.defaults.headers.common['Authorization'] = `Bearer ${response.data.token}`;
+            }
+            
             toast.success(response.data.message);
             set({ loading: false, user: response.data.user, isAuthenticated: true });
             return response.data.success
@@ -128,12 +134,20 @@ export const useUserStore = create(
             withCredentials: true,
           });
           if (response.data.success) {
+            // Clear token from localStorage and Authorization header
+            localStorage.removeItem('token');
+            delete axios.defaults.headers.common['Authorization'];
+            
             toast.success(response.data.message);
             set({ loading: false, user: null, isAuthenticated: false });
           }
         } catch (error) {
+          // Clear token even if logout request fails
+          localStorage.removeItem('token');
+          delete axios.defaults.headers.common['Authorization'];
+          
           toast.error(error.response.data.message);
-          set({ loading: false });
+          set({ loading: false, user: null, isAuthenticated: false });
         }
       },
       forgotPassword: async (email) => {

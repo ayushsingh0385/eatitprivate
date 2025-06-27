@@ -88,7 +88,7 @@ const login = async (req, res) => {
             });
         }
 
-        generateToken(res, user);
+        const token = generateToken(res, user);
         user.lastLogin = new Date();
         await user.save();
 
@@ -99,6 +99,7 @@ const login = async (req, res) => {
             success: true,
             message: `Welcome back ${user.fullname}`,
             user: userWithoutPassword,
+            token: token, // Include token in response
         });
     } catch (error) {
         console.error(error);

@@ -20,13 +20,22 @@ const generateToken = ( res,user) => {
         maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
         sameSite: isProduction ? 'None' : 'Lax',
         secure: isProduction,
-        // For render.com cross-origin requests
+        // For cross-origin on render.com, try setting domain to the TLD
         ...(isProduction && {
-            domain: process.env.COOKIE_DOMAIN || undefined
+            domain: '.onrender.com'
         })
     };
 
+    console.log('=== COOKIE GENERATION DEBUG ===');
+    console.log('isProduction:', isProduction);
+    console.log('cookieOptions:', cookieOptions);
+    console.log('Setting cookie with name: token');
+    console.log('================================');
+
     res.cookie("token", token, cookieOptions);
+    
+    console.log('Cookie set successfully. Response headers:', res.getHeaders());
+    console.log('=== END COOKIE DEBUG ===');
 
     return token;
 };

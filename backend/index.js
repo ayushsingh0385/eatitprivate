@@ -27,7 +27,23 @@ const PORT = process.env.PORT || 3000;
 
 // CORS configuration - should be first
 app.use(cors({
-  origin: process.env.FRONTEND_URL || 'http://localhost:5173',
+  origin: function (origin, callback) {
+    // Allow requests with no origin (like mobile apps or curl requests)
+    if (!origin) return callback(null, true);
+    
+    const allowedOrigins = [
+      process.env.FRONTEND_URL || 'http://localhost:5173',
+      'http://localhost:5173', // Always allow localhost for development
+      'https://eatit-1.onrender.com' // Explicitly allow your render.com domain
+    ];
+    
+    if (allowedOrigins.includes(origin)) {
+      return callback(null, true);
+    }
+    
+    console.log('CORS blocked origin:', origin);
+    return callback(new Error('Not allowed by CORS'), false);
+  },
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization', 'Cookie'],
@@ -52,6 +68,15 @@ app.use((req, res, next) => {
   console.log('User-Agent:', req.headers['user-agent']);
   console.log('NODE_ENV:', process.env.NODE_ENV);
   console.log('FRONTEND_URL:', process.env.FRONTEND_URL);
+  
+  // Debug: Check if browser is sending any cookies at all
+  console.log('All request headers:');
+  Object.keys(req.headers).forEach(key => {
+    if (key.toLowerCase().includes('cook') || key.toLowerCase().includes('auth')) {
+      console.log(`  ${key}: ${req.headers[key]}`);
+    }
+  });
+  
   console.log('==================');
   next();
 });
