@@ -9,10 +9,10 @@ const generateToken = ( res,user) => {
     const token = jwt.sign(
         { userId: user._id.toString() },  // Convert _id to string
         process.env.SECRET_KEY,
-        { expiresIn: '1d' }
+        { expiresIn: '7d' }
     );
 
-    res.cookie("token", token, { httpOnly: true, sameSite: 'strict', maxAge: 24 * 60 * 60 * 1000 });
+    res.cookie("token", token, { httpOnly: true, sameSite: 'None', secure: true, maxAge: 7 * 24 * 60 * 60 * 1000 });
 
     return token;
 };

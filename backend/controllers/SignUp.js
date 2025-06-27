@@ -141,15 +141,15 @@ const verifyEmail = async (req, res) => {
 
         // ✅ Generate JWT token
         const token = jwt.sign({ userId: newUser._id }, process.env.SECRET_KEY, {
-            expiresIn: "7d",
+            expiresIn: "1h",
         });
 
         // ✅ Set token as HTTP-only cookie
         res.cookie("token", token, {
             httpOnly: true,
             secure: process.env.NODE_ENV === "production", // true in prod (https)
-            sameSite: "Lax",
-            maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
+            sameSite: "None",
+            maxAge: 1 * 60 * 60 * 1000,
         });
 
         // ✅ Return user & token in response
