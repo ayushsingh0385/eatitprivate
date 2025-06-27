@@ -26,16 +26,7 @@ const generateToken = ( res,user) => {
         })
     };
 
-    console.log('=== COOKIE GENERATION DEBUG ===');
-    console.log('isProduction:', isProduction);
-    console.log('cookieOptions:', cookieOptions);
-    console.log('Setting cookie with name: token');
-    console.log('================================');
-
     res.cookie("token", token, cookieOptions);
-    
-    console.log('Cookie set successfully. Response headers:', res.getHeaders());
-    console.log('=== END COOKIE DEBUG ===');
 
     return token;
 };

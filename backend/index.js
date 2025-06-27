@@ -56,30 +56,30 @@ app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ extended: true, limit: '10mb' }));
 app.use(express.static('public'));
 
-// Debug middleware to log cookies
-app.use((req, res, next) => {
-  console.log('=== REQUEST DEBUG ===');
-  console.log('Method:', req.method);
-  console.log('URL:', req.url);
-  console.log('Cookies received:', req.cookies);
-  console.log('Raw cookie header:', req.headers.cookie);
-  console.log('Origin:', req.headers.origin);
-  console.log('Referer:', req.headers.referer);
-  console.log('User-Agent:', req.headers['user-agent']);
-  console.log('NODE_ENV:', process.env.NODE_ENV);
-  console.log('FRONTEND_URL:', process.env.FRONTEND_URL);
+// // Debug middleware to log cookies
+// app.use((req, res, next) => {
+//   console.log('=== REQUEST DEBUG ===');
+//   console.log('Method:', req.method);
+//   console.log('URL:', req.url);
+//   console.log('Cookies received:', req.cookies);
+//   console.log('Raw cookie header:', req.headers.cookie);
+//   console.log('Origin:', req.headers.origin);
+//   console.log('Referer:', req.headers.referer);
+//   console.log('User-Agent:', req.headers['user-agent']);
+//   console.log('NODE_ENV:', process.env.NODE_ENV);
+//   console.log('FRONTEND_URL:', process.env.FRONTEND_URL);
   
-  // Debug: Check if browser is sending any cookies at all
-  console.log('All request headers:');
-  Object.keys(req.headers).forEach(key => {
-    if (key.toLowerCase().includes('cook') || key.toLowerCase().includes('auth')) {
-      console.log(`  ${key}: ${req.headers[key]}`);
-    }
-  });
+//   // Debug: Check if browser is sending any cookies at all
+//   console.log('All request headers:');
+//   Object.keys(req.headers).forEach(key => {
+//     if (key.toLowerCase().includes('cook') || key.toLowerCase().includes('auth')) {
+//       console.log(`  ${key}: ${req.headers[key]}`);
+//     }
+//   });
   
-  console.log('==================');
-  next();
-});
+//   console.log('==================');
+//   next();
+// });
 
 // API Routes
 app.use('/api', routes);

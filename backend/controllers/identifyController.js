@@ -200,7 +200,6 @@ function extractJSONBlock(text, isArray = false) {
 
 const Information = require('../models/UserInformation.js')
 async function identifyImage(req, res){
-  console.log("Hello ")
   console.log(req.user)
   if (req.user) {
       const u = await Information.findOne({ authId: req.user }).lean();

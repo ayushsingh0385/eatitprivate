@@ -18,8 +18,8 @@ const EnterPersonaldetails = async (req, res) => {
       id
     } = req.body;
     const imageLocalPath = req.file?.path;
-    console.log("Request file: ",req.file)
-    console.log("Request.body: ",req.body)
+    // console.log("Request file: ",req.file)
+    // console.log("Request.body: ",req.body)
     // Create an array to collect missing fields
     const missingFields = [];
     
@@ -80,7 +80,6 @@ const EnterPersonaldetails = async (req, res) => {
     if(imageData?.url) {
       const analysisString=await analyzeHealthFromImage(imageData?.url);
       if(analysisString) PersonalData.documents=analysisString;
-      console.log(analysisString)
     }
 
     const newUser = await User.create(PersonalData);

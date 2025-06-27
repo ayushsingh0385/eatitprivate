@@ -23,7 +23,7 @@ const Login = () => {
       const result = await login(input);
       if (result) navigate("/");
     } catch (error) {
-      // console.log(error);
+      console.log(error);
     }
   };
 
