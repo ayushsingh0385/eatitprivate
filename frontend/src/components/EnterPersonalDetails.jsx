@@ -64,9 +64,7 @@ const EnterPersonalDetails = ({ isEdit = false }) => {
           const response = await axios.get(
             `${import.meta.env.VITE_URL || 'http://localhost:3000'}/api/v1/profile/me`,
             {
-              headers: {
-                Authorization: `Bearer ${localStorage.getItem("token")}`,
-              },
+              withCredentials: true,
             }
           );
           const profile = response.data;
@@ -193,9 +191,9 @@ const EnterPersonalDetails = ({ isEdit = false }) => {
           `${import.meta.env.VITE_URL || 'http://localhost:3000'}/api/v1/profile/Update-Personal-Details`,
           formData,
           {
+            withCredentials: true,
             headers: {
               "Content-Type": "multipart/form-data",
-              Authorization: `Bearer ${localStorage.getItem("token")}`,
             },
           }
         );

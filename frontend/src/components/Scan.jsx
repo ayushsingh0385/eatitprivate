@@ -67,8 +67,8 @@ function Scan() {
         `${import.meta.env.VITE_URL || 'http://localhost:3000'}/api/identify`,
         formData,
         {
+          withCredentials: true,
           headers: {
-            Authorization: `Bearer ${localStorage.getItem('token')}`,
             'Content-Type': 'multipart/form-data',
           },
         }

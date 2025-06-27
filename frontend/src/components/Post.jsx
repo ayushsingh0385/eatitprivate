@@ -105,9 +105,7 @@ const Post = () => {
             const response = await axios.get(
                 `${import.meta.env.VITE_URL || 'http://localhost:3000'}/api/v1/posts${selectedCategory !== "all" ? `?category=${selectedCategory}` : ""}`,
                 {
-                    headers: {
-                        Authorization: `Bearer ${localStorage.getItem('token')}`,
-                    },
+                    withCredentials: true,
                 }
             );
 
@@ -285,7 +283,7 @@ const Post = () => {
             const response = await axios.post(
                 `${import.meta.env.VITE_URL || 'http://localhost:3000'}/api/v1/posts/${postId}/vote`,
                 { optionIndex },
-                { headers: { Authorization: `Bearer ${localStorage.getItem('token')}` } }
+                { withCredentials: true }
             );
 
             // Update UI with server response

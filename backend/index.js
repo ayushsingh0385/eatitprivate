@@ -34,7 +34,6 @@ app.use(express.static('public'));
 
 
 // CORS configuration
-console.log("FRONTEND_URL: ", process.env.FRONTEND_URL);
 app.use(cors({
   origin: [`${process.env.FRONTEND_URL || 'http://localhost:5173'}`],
   credentials: true,

@@ -44,9 +44,7 @@ const DisplayPost = () => {
                 const response = await axios.get(
                     `${import.meta.env.VITE_URL || 'http://localhost:3000'}/api/v1/posts/${postId}`,
                     {
-                        headers: {
-                            Authorization: `Bearer ${localStorage.getItem('token')}`,
-                        },
+                        withCredentials: true,
                     }
                 );
 
@@ -90,9 +88,7 @@ const DisplayPost = () => {
                 `${import.meta.env.VITE_URL || 'http://localhost:3000'}/api/v1/posts/${postId}/like`,
                 {},
                 {
-                    headers: {
-                        Authorization: `Bearer ${localStorage.getItem('token')}`,
-                    },
+                    withCredentials: true,
                 }
             );
             fetchPost();
@@ -158,9 +154,7 @@ const DisplayPost = () => {
                 `${import.meta.env.VITE_URL || 'http://localhost:3000'}/api/v1/posts/${postId}/vote`,
                 { optionIndex },
                 {
-                    headers: {
-                        Authorization: `Bearer ${localStorage.getItem('token')}`,
-                    }
+                    withCredentials: true,
                 }
             );
 
@@ -195,7 +189,7 @@ const DisplayPost = () => {
             const response = await axios.post(
                 `${import.meta.env.VITE_URL || 'http://localhost:3000'}/api/v1/posts/${postId}/comment`,
                 { text: commentText },
-                { headers: { Authorization: `Bearer ${localStorage.getItem("token")}` }}
+                { withCredentials: true }
             );
 
             setPost(prev => ({
@@ -217,9 +211,7 @@ const DisplayPost = () => {
                 `${import.meta.env.VITE_URL || 'http://localhost:3000'}/api/v1/posts/comment/${commentId}/reply`,
                 { text: replyText, userFullName: fullname },
                 {
-                    headers: {
-                        Authorization: `Bearer ${localStorage.getItem('token')}`,
-                    },
+                    withCredentials: true,
                 }
             );
 

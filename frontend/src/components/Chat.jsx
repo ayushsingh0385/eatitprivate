@@ -48,11 +48,11 @@ function Chat({ onBackToHome }) {
     setInput('');
     setFile(null);
     setIsTyping(true);
-    console.log("VITE_URL: ", import.meta.env.VITE_URL);
     try {
       const response = await fetch(`${import.meta.env.VITE_URL || 'http://localhost:3000'}/chat`, {
         method: 'POST',
         body: formData,
+        credentials: 'include',
       });
 
       if (!response.ok) {

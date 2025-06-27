@@ -101,7 +101,7 @@ const EnterPersonaldetails = async (req, res) => {
 
 const updateProfile = async (req, res) => {
   try {
-    const userId = req.id || req.userId;
+    const userId = req.user; // From isAuthenticated middleware
     if (!userId) {
       return res.status(401).json({
         success: false,
@@ -168,7 +168,7 @@ const updateProfile = async (req, res) => {
 
 const FetchDetails = async (req, res) => {
   try {
-    const userId = req.id || req.userId;
+    const userId = req.user; // From isAuthenticated middleware
 
     if (!userId) {
       return res.status(401).json({

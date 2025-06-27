@@ -248,7 +248,7 @@ const resetPassword = async (req, res) => {
 
 const checkAuth = async (req, res) => {
     try {
-        const userId = req.id;
+        const userId = req.user; // From isAuthenticated middleware
         const user = await User.findById(userId).select("-password");
         if (!user) {
             return res.status(404).json({
