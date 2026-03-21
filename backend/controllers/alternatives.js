@@ -69,7 +69,7 @@ async function fetchTopYouTubeRecipe(query) {
 // Fetch alternatives from Gemini API
 async function fetchGeminiAlternatives(query) {
   try {
-    const model = ai.getGenerativeModel({ model: 'gemini-2.0-flash' });
+    const model = ai.getGenerativeModel({ model: 'gemini-3-flash-preview' });
     
     const prompt = `
 You are a health and diet assistant with expertise in recommending healthy alternatives.
