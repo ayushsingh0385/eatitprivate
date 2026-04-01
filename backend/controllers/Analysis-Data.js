@@ -44,7 +44,7 @@ async function analyzeHealthFromImage(imageUrl) {
 
     // 4) generate
     const resp = await ai.models.generateContent({
-      model: 'gemini-3-flash-preview',
+      model: 'gemini-3.1-flash-lite-preview',
       contents
     });
 

@@ -37,7 +37,7 @@ function extractJSONBlock(text, isArray = false) {
 
 //     // 2) Check for nutrition label
 //     const check = await ai.models.generateContent({
-//       model: 'gemini-3-flash-preview',
+//       model: 'gemini-3.1-flash-lite-preview',
 //       contents: createUserContent([
 //         createPartFromUri(myFile.uri, myFile.mimeType),
 //         `Does this image contain a nutrition facts label + ingredient list? Answer "yes" or "no".`
@@ -48,7 +48,7 @@ function extractJSONBlock(text, isArray = false) {
 //     if (hasLabel) {
 //       // 3a) OCR the label
 //       const ocr = await ai.models.generateContent({
-//         model: 'gemini-3-flash-preview',
+//         model: 'gemini-3.1-flash-lite-preview',
 //         contents: createUserContent([
 //           createPartFromUri(myFile.uri, myFile.mimeType),
 //           `Extract only the plain text of the nutrition table and ingredient list.`
@@ -59,7 +59,7 @@ function extractJSONBlock(text, isArray = false) {
 
 //       // 3b) Analyze the label
 //       const analysisResp = await ai.models.generateContent({
-//         model: 'gemini-3-flash-preview',
+//         model: 'gemini-3.1-flash-lite-preview',
 //         contents: createUserContent([
 //           { text: `You are an expert dietitian & nutritionist.` },
 //           { text:
@@ -111,7 +111,7 @@ function extractJSONBlock(text, isArray = false) {
 
 //     // 4) Perform object detection
 //     const detResp = await ai.models.generateContent({
-//       model: 'gemini-3-flash-preview',
+//       model: 'gemini-3.1-flash-lite-preview',
 //       contents: createUserContent([
 //         createPartFromUri(myFile.uri, myFile.mimeType),
 //         `Detect only physical food/drink/medicine items. Return ONLY a JSON array:\n` +
@@ -135,7 +135,7 @@ function extractJSONBlock(text, isArray = false) {
 //     // 5) Analyze the first detected item
 //     const label = detections[0].label;
 //     const analysisResp = await ai.models.generateContent({
-//       model: 'gemini-3-flash-preview',
+//       model: 'gemini-3.1-flash-lite-preview',
 //       contents: createUserContent([
 //         { text: `You are a senior dietitian & nutritionist.` },
 //         { text:
@@ -233,7 +233,7 @@ async function identifyImage(req, res){
 
     console.log('[POST /api/identify] Checking for nutrition label...');
     const checkResp = await ai.models.generateContent({
-      model: 'gemini-3-flash-preview',
+      model: 'gemini-3.1-flash-lite-preview',
       contents: createUserContent([
         createPartFromUri(myFile.uri, myFile.mimeType),
         `Does this image contain a nutrition facts label + ingredient list? Answer "yes" or "no".`
@@ -245,7 +245,7 @@ async function identifyImage(req, res){
     if (hasLabel) {
       console.log('[POST /api/identify] Extracting raw text from nutrition label...');
       const ocrResp = await ai.models.generateContent({
-        model: 'gemini-3-flash-preview',
+        model: 'gemini-3.1-flash-lite-preview',
         contents: createUserContent([
           createPartFromUri(myFile.uri, myFile.mimeType),
           `Extract only the plain text of the nutrition table and ingredient list.`
@@ -257,7 +257,7 @@ async function identifyImage(req, res){
 
       console.log('[POST /api/identify] Analyzing nutrition label...');
       const analysisResp = await ai.models.generateContent({
-        model: 'gemini-3-flash-preview',
+        model: 'gemini-3.1-flash-lite-preview',
         contents: createUserContent([
           { text: `You are an expert dietitian & nutritionist.` },
           { text:
@@ -315,7 +315,7 @@ async function identifyImage(req, res){
 
     console.log('[POST /api/identify] Performing object detection...');
     const detectResp = await ai.models.generateContent({
-      model: 'gemini-3-flash-preview',
+      model: 'gemini-3.1-flash-lite-preview',
       contents: createUserContent([
         createPartFromUri(myFile.uri, myFile.mimeType),
         `Detect only physical food/drink/medicine items in this photo. Return _only_ a JSON array: ` +
@@ -343,7 +343,7 @@ async function identifyImage(req, res){
     const label = detections[0].label;
 
     const analysisResp = await ai.models.generateContent({
-      model: 'gemini-3-flash-preview',
+      model: 'gemini-3.1-flash-lite-preview',
       contents: createUserContent([
         { text: `You are a senior dietitian & nutritionist.` },
         { text:
